@@ -118,18 +118,22 @@ a {
 
                     .control-password {
                         position: absolute;
-                        top: 10px;
+                        top: 20px;
                         right: 0;
 
                         border-radius: 20px;
-                        font-size: 14px;
-                        height: 20px;
-                        width: 40px;
+                        font-size: 13px;
+                        height: 15px;
+                        width: 31px;
                         cursor: pointer;
                         background: rgb(139, 255, 143);
                         color: rgb(55, 55, 55);
                         transition: .1s ease-in-out;
+                        text-align: center;
 
+                        span {
+                            margin-top: -10px;
+                        }
 
                         &:hover {
                             background: rgb(0, 255, 17);
