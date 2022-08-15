@@ -122,16 +122,19 @@ a {
                         right: 0;
 
                         border-radius: 20px;
-                        font-size: 13px;
+                        font-size: 10px;
                         height: 15px;
                         width: 31px;
                         cursor: pointer;
-                        background: rgb(139, 255, 143);
+                        background: rgb(182, 255, 185);
                         color: rgb(55, 55, 55);
                         transition: .1s ease-in-out;
                         text-align: center;
 
                         span {
+                            position: relative;
+                            top: 3px;
+                            right: 0;
                             margin-top: -10px;
                         }
 

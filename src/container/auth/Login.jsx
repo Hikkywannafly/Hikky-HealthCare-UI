@@ -1,11 +1,15 @@
 import './Login.scss';
 import React, { useState } from 'react';
-
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from '~/redux/apiRequest';
+import { useDispatch } from "react-redux";
 const Login = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState({ value: '', showPassword: false, });
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const onChangeUsername = (e) => {
         const username = e.target.value;
         setUserName(username);
@@ -13,19 +17,19 @@ const Login = () => {
     }
     const onChangePassword = (e) => {
         const password = e.target.value;
-        let element = document.querySelector('.control-password');
-        if (password === '') element.style.display = 'none';
+        // let element = document.querySelector('.control-password');
+        // if (password === '') element.style.display = 'none';
         console.log(password);
-        setPassword(password);
+        setPassword({ value: password });
     }
 
     const handleLogin = (e) => {
         e.preventDefault();
         const newUser = {
-            username: userName,
+            userName: userName,
             password: password.value,
         }
-        console.log(newUser);
+        loginUser(newUser, dispatch, navigate);
     }
     const handleClickShowPassword = () => {
         setPassword({ ...password, showPassword: !password.showPassword });
@@ -75,7 +79,7 @@ const Login = () => {
                                         <span className="span-style"></span>
                                         <label className="label-style" >Password</label>
                                         {password.value !== '' && (<div
-                                            style={{ display: 'none' }}
+                                            style={{ display: 'block' }}
                                             // ref={(node) => { mynode = node }}
                                             className='control-password'
                                             onClick={handleClickShowPassword}
