@@ -1,49 +1,43 @@
 
 
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from '~/redux/apiRequest';
-import { useDispatch } from "react-redux";
-const Login = () => {
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState({ value: '', showPassword: false, });
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState('');
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const onChangeUsername = (e) => {
-        const username = e.target.value;
-        setUserName(username);
-        console.log(username);
-    }
-    const onChangePassword = (e) => {
-        const password = e.target.value;
-        // let element = document.querySelector('.control-password');
-        // if (password === '') element.style.display = 'none';
-        console.log(password);
-        setPassword({ value: password });
-    }
+// import { Link, useNavigate } from "react-router-dom";
+// import { loginUser } from '~/redux/apiRequest';
+// import { useDispatch } from "react-redux";
+import orArea from '~/components/chore/orArea';
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        const newUser = {
-            userName: userName,
-            password: password.value,
-        }
-        loginUser(newUser, dispatch, navigate);
-    }
-    const handleClickShowPassword = () => {
-        setPassword({ ...password, showPassword: !password.showPassword });
-    }
+const initialState = {
+    username: '',
+    password: '',
+}
+const Login = () => {
+    const [username, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+
 
     return (
         <>
-            <div className="login-contaimer font-fira py-2 bg-white  flex flex-col min-h-screen justify-center  ">
+            <div className=" flex flex-row  w-full h-10 justify-between text-sm font-medium p-5">
+                <div>
+
+                </div>
+
+                <div className="text-center mb-5">
+                    <p href="#" class="group text-black transition duration-300 cursor-pointer">
+                        CREATE ACCOUNT
+                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-black"></span>
+                    </p>
+                </div>
+
+
+            </div>
+            <div className="login-contaimer font-fira py-2 bg-white  flex flex-col min-h-screen justify-center ml-auto  ">
+
                 <main className="flex flex-col items-center justify-center  text-center align-center w-full">
                     <div className="text-2xl font-bold flex flex-col items-center justify-center w-full text-center align-center mb-10 ">
                         <h1> Login into Hikkywannafly</h1>
                     </div>
-                    <div className="flex flex-col items-center just-cotent w-800 h-auto  ">
+                    <div className="flex flex-col items-center just-cotent w-800 h-auto lg:flex-row md:flex-row  ">
                         <div className=" basis-3/7 w-325 text-left h-auto ">
                             <div display="flex h-auto  ">
                                 <div className=" my-8">
@@ -63,18 +57,14 @@ const Login = () => {
                                 </div>
 
                                 <div className=" mb-4">
-                                    <button class="bg-black px-12 py-2 w-full text-sm border-black outline-black border-2 text-white hover:text-black hover:shadow-[inset_20rem_0_0_0]   hover:shadow-gray-50 duration-[400ms,700ms] transition-[color,box-shadow]">
+                                    <button class=" rounded-lg bg-black px-12 py-2 w-full text-sm border-black outline-black border-2 text-white hover:text-black hover:shadow-[inset_25rem_0_0_0]   hover:shadow-gray-50 duration-[400ms,700ms] transition-[color,box-shadow]">
                                         LOG IN
                                     </button>
                                 </div>
                             </div>
                         </div>
                         <div className="basis-1/7 h-auto ">
-                            <div className="flex flex-row justify-center items-center w-[320px]  lg:w-48  ">
-                                <div className="bg-gray-300 h-[1px] w-full "></div>
-                                <div className=" text-gray-500 mx-3"> or</div>
-                                <div className="bg-gray-300 h-[1px]  w-full "></div>
-                            </div>
+                            <orArea />
 
                         </div>
 
@@ -100,9 +90,7 @@ const Login = () => {
                                         <svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path></svg>
                                         <span className="m-auto"> Sign in with Facebook </span>
                                     </button>
-
                                 </div>
-
                             </div>
                         </div>
                     </div>

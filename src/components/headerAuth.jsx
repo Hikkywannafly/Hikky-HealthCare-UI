@@ -1,4 +1,4 @@
-function Home() {
+const headerAuth = () => {
     return (
         <>
             <div class="group grid w-fit border p-2 text-3xl " style={{ 'clip-path': 'inset(0 0 0 0 )' }} >
@@ -10,4 +10,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default headerAuth;
