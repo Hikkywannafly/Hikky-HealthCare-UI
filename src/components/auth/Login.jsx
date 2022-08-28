@@ -14,58 +14,50 @@ const initialState = {
 const Login = () => {
     const [data, setData] = useState(initialState)
     const [visible, setVisible] = useState(false)
+    const [error, setError] = useState(false)
     const { userName, password } = data;
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const datatest = useSelector((state) => state.auth.isFetching);
     const message = useSelector((state) => state.auth);
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
-        console.log('>>check data', data);
     }
     const handleClick = (e) => {
         setVisible(!visible);
     }
     const handleLogin = async (e) => {
         e.preventDefault();
-        const result = await loginUser({ userName, password }, dispatch, navigate);
-    }
-    toast.promise(
-        message,
-        {
-            loading: 'Loading',
-            success: (data) => `Successfully saved ${data.name}`,
-            error: (err) => `This just happened: ${err.toString()}`,
-        },
-        {
-            style: {
-                minWidth: '250px',
-            },
-            success: {
-                duration: 5000,
-                icon: '🔥',
-            },
+        try {
+            const result = await loginUser({ userName, password }, dispatch, navigate);
+            if (result.susscess) {
+                toast.success(result.message, {
+                    style:
+                        { fontSize: '14px', },
+                });
+                return;
+            }
+            setError(result.message);
+            return toast.error(result.message, {
+                style:
+                    { fontSize: '14px', },
+            });
+
         }
-    );
+        catch (err) {
+            console.log('>>check err', err);
+        }
+
+    }
+
 
     return (
         <>
-            <HeaderAuth />
+            <HeaderAuth content="CREATE ACCOUNT" link="/register" />
             <div className="login-container font-fira py-2 bg-white items-center  flex flex-col min-h-screen justify-center m-auto  ">
                 <main className="flex flex-col items-center justify-center  text-center align-center w-full m-auto ">
                     <div className="text-2xl font-bold flex flex-col items-center justify-center w-full text-center align-center mb-10 ">
                         <h1> Login into Hikkywannafly  </h1>
                         <Toaster />
-                        {/* {error ? (
-
-                            <>
-                                {toast.error(errorData.message)}
-                                <Toaster
-                                    position="top-center"
-                                    autoClose={3000} />
-
-                            </>) : (null)} */}
-
                     </div>
                     <form onSubmit={handleLogin}>
                         <div className="flex flex-col items-center just-cotent w-800 h-auto lg:flex-row md:flex-row  ">
@@ -77,7 +69,9 @@ const Login = () => {
                                             type='text'
                                             name='userName'
                                             id='floating_email'
-                                            content='Email Address' />
+                                            content='Email Address'
+                                        // error={error ? error : false}
+                                        />
                                     </div>
 
                                     <div className="mb-12">
